@@ -1,4 +1,4 @@
-# Microservise for AMCEF internship application
+# Microservice for AMCEF internship application
 
 ## Guide:
 Make sure you have Python, Django, fastAPI and requests modules installed \
