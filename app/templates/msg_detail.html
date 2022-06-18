@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Message detail</title>
+</head>
+<body>
+    <label><a href="{% url 'app:index' %}">home</a></label>
+    <br>
+    {% if deleted %}
+        <label>Message deleted</label>
+    {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <input type="submit" name="delete" value="Delete">
+        </form>
+        <br>
+        <label><a href="{% url 'app:edit_msg' msg.id %}">Edit this message</a></label>
+        <br>
+        <h1>{{msg.title}}</h1>
+        <h3>By user: {{msg.userID}}</h3>
+        <div>
+        {{ msg.body }}
+        </div>
+    {% endif %}
+</body>
+</html>

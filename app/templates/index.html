@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Messages</title>
+    </head>
+    <body>
+        <label><a href="{% url 'app:new_msg' %}">Create new message</a></label>
+        <br>
+        <label>Find message by ID:</label>
+        <form method="post">
+            {% csrf_token %}
+            <input type="number" name="ID">
+            <input type="submit" name="msgID" value="Find by msgID">
+            <input type="submit" name="userID" value="Find by userID">
+        </form>
+        <br>
+        {% if msgs %}
+            <a href="{% url 'app:msg_detail' msgs.id %}">{{ msgs.title }}</a>
+        {% else %}
+            <label>No messages</label>
+        {% endif %}
+    </body>
+</html>
+
