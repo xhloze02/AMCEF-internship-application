@@ -16,7 +16,15 @@
         </form>
         <br>
         {% if msgs %}
-            <a href="{% url 'app:msg_detail' msgs.id %}">{{ msgs.title }}</a>
+            {% if many %}
+                <ul>
+                {% for msg in msgs %}
+                    <li><a href="{% url 'app:msg_detail' msg.id %}">{{ msg.title }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <a href="{% url 'app:msg_detail' msgs.id %}">{{ msgs.title }}</a>
+            {% endif %}
         {% else %}
             <label>No messages</label>
         {% endif %}

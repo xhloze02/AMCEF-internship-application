@@ -11,6 +11,7 @@ def index(request):
     :return: Renders the page
     """
     msgs = False                    # msgs will store either received message or no message (False)
+    many = False
     url = root_url + "api/msg/"     # url for API request
 
     if request.POST.get("msgID"):   # if "find" button is pressed
@@ -23,11 +24,21 @@ def index(request):
             msgs = False
         else:
             msgs = response.json()
+
     elif request.POST.get("userID"):
         msgs = False
+        # url for API request with userID
+        url = url + "user/" + str(request.POST.get("ID"))
+        # call API and check response
+        response = requests.get(url=url)
+        if response.status_code == 400:
+            msgs = False
+        else:
+            many = True
+            msgs = response.json()
 
     # render the page
-    return render(request, "index.html", {"msgs": msgs})
+    return render(request, "index.html", {"msgs": msgs, "many": many})
 
 
 def msg_detail_view(request, msgID):

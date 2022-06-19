@@ -43,6 +43,29 @@ def create_msg(request):
     return HttpResponse(status=201)
 
 
+@app.get("msg/user/{userID}")
+def get_user_messages(request, userID):
+    """
+    Get message endpoint
+    :param request: Request
+    :param userID: ID of wanted user
+    :return: JSON if OK or HTML response 400 if error
+    """
+    # first, check if user exists
+    if not get_by_api(userID=userID):
+        return HttpResponse(status=400)
+    # get messages from database
+    db_msgs = Message.objects.filter(userID=userID)
+    if not db_msgs:
+        return HttpResponse(status=400)
+
+    # create a JSON and return it
+    msgs = []
+    for msg in db_msgs:
+        msgs.append({"id": msg.pk, "userID": msg.userID, "title": msg.title, "body": msg.body})
+    return JsonResponse(msgs, safe=False)
+
+
 @app.get("/msg/{msgID}")
 def get_message(request, msgID):
     """

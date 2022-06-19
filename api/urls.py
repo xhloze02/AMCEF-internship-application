@@ -8,6 +8,7 @@ app_name = "api"
 urlpatterns = [
     path("", views.index, name="index"),
     path("msg/<int:msgID>", views.get_message, name="get_msg"),
+    path("msg/user/<int:userID>", views.get_user_messages, name="get_user_msg"),
     path("msg/<int:msgID>/delete", views.delete_message, name="del_msg"),
     path("msg/<int:msgID>/edit", views.edit_message, name="edit_msg"),
     path("new_msg/", views.create_msg, name="new_msg")
