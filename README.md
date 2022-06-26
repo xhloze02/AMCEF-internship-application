@@ -1,10 +1,11 @@
 # Microservice for AMCEF internship application
 
 ## Guide:
-Make sure you have Python, Django, fastAPI and requests modules installed \
+Make sure you have Python, Django and requests modules installed \
+Microservice uses SQLite3 database\
 \
 First, you need to make migrations and apply them by running these commands 
-(make sure you are in right directory)\
+(make sure you are in a right directory)\
 `python3 manage.py makemigrations api`\
 and then \
 `python3 manage.py migrate`\

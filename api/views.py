@@ -1,12 +1,8 @@
 from django.http import HttpResponse, JsonResponse
-from fastapi import FastAPI
 from .models import Message
 import requests
 
-app = FastAPI()
 
-
-@app.get("/")
 def index(request):
     """
     Index url of API, does nothing
@@ -16,7 +12,6 @@ def index(request):
     return HttpResponse(status=200)
 
 
-@app.post("/new_msg")
 def create_msg(request):
     """
     Create message endpoint
@@ -43,7 +38,6 @@ def create_msg(request):
     return HttpResponse(status=201)
 
 
-@app.get("msg/user/{userID}")
 def get_user_messages(request, userID):
     """
     Get message endpoint
@@ -66,7 +60,6 @@ def get_user_messages(request, userID):
     return JsonResponse(msgs, safe=False)
 
 
-@app.get("/msg/{msgID}")
 def get_message(request, msgID):
     """
     Get message endpoint
@@ -85,7 +78,6 @@ def get_message(request, msgID):
     return JsonResponse({"id": msg.pk, "userID": msg.userID, "title": msg.title, "body": msg.body})
 
 
-@app.post("/msg/{msgID}/edit")
 def edit_message(request, msgID):
     """
     Edit message endpoint
@@ -118,7 +110,6 @@ def edit_message(request, msgID):
     return HttpResponse(status=201)
 
 
-@app.delete("/msg/{msgID}/delete")
 def delete_message(request, msgID):
     """
     Delete message endpoint
